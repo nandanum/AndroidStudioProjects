@@ -12,7 +12,7 @@ public class EditItemActivity extends AppCompatActivity {
     //TextView txt;
     EditText etName;
     ArrayAdapter<String> itemsAdapter;
-String item;
+    String item;
     private final int REQUEST_CODE = 20;
 
     @Override
@@ -22,14 +22,12 @@ String item;
         setContentView(R.layout.activity_edit_item);
         EditText etName = (EditText) findViewById(R.id.etMultiLineText);
         String itemData;
-        // setUpListViewClickListener();
-        //  itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, itemData);
 
         Intent i = getIntent();
         String receivedAction = i.getAction();
         // fetch value from key-value pair and make it visible on TextView.
 
-         item = i.getStringExtra("Text");
+        item = i.getStringExtra("Text");
         System.out.println(item);
 
         etName.setText(item);
@@ -38,14 +36,14 @@ String item;
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_todo, menu);
         return true;
     }
+
+    //Update new Item to the List
     public void onSave(View view) {
         EditText etName = (EditText) findViewById(R.id.etMultiLineText);
         // Prepare data intent
@@ -53,27 +51,22 @@ String item;
         // Pass relevant data back as a result
         data.putExtra("Text", etName.getText().toString());
 
-        data.putExtra("REQUEST_CODE",20);
-        //data.putExtra("Pos", 0); // ints work too
-        // Activity finished ok, return the data
-        //setResult(RESULT_OK, data);
-        setResult(RESULT_OK,data);// set result code and bundle data for response
+        data.putExtra("REQUEST_CODE", 20);
+        setResult(RESULT_OK, data);// set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
     }
 
+    //If item to be cancel do nothing.
     public void onCancel(View view) {
-      //  EditText etName = (EditText) findViewById(R.id.etMultiLineText);
+        //  EditText etName = (EditText) findViewById(R.id.etMultiLineText);
         // Prepare data intent
         Intent data = new Intent();
         // Pass relevant data back as a result
         data.putExtra("Text", item);
 
-        data.putExtra("REQUEST_CODE",20);
-        //data.putExtra("Pos", 0); // ints work too
-        // Activity finished ok, return the data
-        //setResult(RESULT_OK, data);
-        setResult(RESULT_OK,data);// set result code and bundle data for response
+        data.putExtra("REQUEST_CODE", 20);
+        setResult(RESULT_OK, data);// set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
     }

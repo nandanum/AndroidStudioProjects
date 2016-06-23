@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 public class TodoActivity extends AppCompatActivity {
-   ArrayList<String> items;
+    ArrayList<String> items;
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
     private List<Button> buttons;
@@ -41,15 +41,7 @@ public class TodoActivity extends AppCompatActivity {
     private final int REQUEST_CODE_UPDATE = 20;
 
     private int position;
-/*
-    private static final int[] BUTTON_IDS = {
-            R.id.btnDeleteOne,
-            R.id.btnDeleteTwo,
-            R.id.btnDeleteThree,
-            R.id.btnDeleteFour,
 
-    };
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +52,10 @@ public class TodoActivity extends AppCompatActivity {
         items = new ArrayList<>();
         items.add("First Item");
         items.add("Second Item");
-        String listString =items.toString();
-        listString=listString.substring(1,listString.length()-1);
-        String newList[]=listString.split(",");
-        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+        String listString = items.toString();
+        listString = listString.substring(1, listString.length() - 1);
+        String newList[] = listString.split(",");
+        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 
         lvItems.setAdapter(itemsAdapter);
 
@@ -76,7 +68,6 @@ public class TodoActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
 
 
     private void setUpListViewListener() {
@@ -94,11 +85,8 @@ public class TodoActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void setUpListViewClickListener() {
-        // ListView lv =getListView();
+
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int pos,
@@ -110,16 +98,16 @@ public class TodoActivity extends AppCompatActivity {
                 String text = lvItems.getItemAtPosition(pos).toString();
                 position = lvItems.getPositionForView(view);
                 view.setSelected(true);
-                //Object o = parent.getItemAtPosition(pos);
+
                 i.putExtra("Text", text);
-                i.putExtra("ID",pos);
-                //i.putExtra()
+                i.putExtra("ID", pos);
+
 
                 i.setType("text/plain");
 
-                //  i.putExtra("Pos",pos);// pass arbitrary data to launched activity
+
                 startActivityForResult(i, 20);
-             //   startActivityForResult(i,REQUEST_CODE_UPDATE);
+
 
             }
         });
@@ -155,83 +143,31 @@ public class TodoActivity extends AppCompatActivity {
         return true;
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
-
- /*   public View getView(int position, View convertView, ViewGroup parent) {
-
-        if (null == convertView) {
-            LinearLayout view = (LinearLayout) LinearLayout.inflate(this,
-                    R.layout.message, null);
-            Log.d("SeenDroid", String.format("Get view %d", position));
-            TextView title = new TextView(view.getContext());
-            title.setText(this.items.get(position).getTitle());
-            view.addView(title);
-            return view;
-        } else {
-            LinearLayout view = (LinearLayout) convertView;
-            TextView title = (TextView) view.getChildAt(0);
-            title.setText(this.items.get(position).getTitle());
-            return convertView;
-        }
-    }
-*/
-
-   public void onSubmit(View view) {
-       /*EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+    public void onSubmit(View view) {
+        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+        Boolean isItemPresent = false;
         String itemText = etNewItem.getText().toString();
-       itemsAdapter.add(itemText);
-        etNewItem.setText("");
-       items.add(itemText);
-       lvItems.setAdapter(itemsAdapter);
-       itemsAdapter.notifyDataSetChanged();*/
 
-       //items.clear();
-       //items.addAll(hs);
-     //  items.clear();
-       EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
-       Boolean isItemPresent=false;
-       String itemText = etNewItem.getText().toString();
-     //  Adapter.getCount()
-      for (int i = 0; i < itemsAdapter.getCount(); i++) {
+        for (int i = 0; i < itemsAdapter.getCount(); i++) {
 
-          if (itemText .equalsIgnoreCase(itemsAdapter.getItem(i))) {
-              isItemPresent = true;
-              break;
-          }
-      }
-            if(!isItemPresent){   //already exists
-           //   items.add(itemText);
-                itemsAdapter.add(itemText);
-               etNewItem.setText("");
-
-                lvItems.setAdapter(itemsAdapter);
-               //itemsAdapter.notifyDataSetChanged();
-             //  writeItems();
-
-           }
-       else {
-                etNewItem.setText("");
+            if (itemText.equalsIgnoreCase(itemsAdapter.getItem(i))) {
+                isItemPresent = true;
+                break;
             }
+        }
+        if (!isItemPresent) {   //if not already exists
+
+            itemsAdapter.add(itemText);
+            etNewItem.setText("");
+
+            lvItems.setAdapter(itemsAdapter);
+
+        } else {
+            etNewItem.setText("");
+        }
 
     }
-
-
-
-
 
 
     @Override
@@ -290,30 +226,16 @@ public class TodoActivity extends AppCompatActivity {
                     break;
                 }
             }
-            if (!isPresent) {   //already exists
-                //   items.add(itemText);
+            if (!isPresent) {   //if not already exists
+
                 items.set(position, text);
-                //items.add(text);
+
                 lvItems.setAdapter(itemsAdapter);
                 itemsAdapter.notifyDataSetChanged();
             }
-        /*
-    if (requestCode == REQUEST_CODE_UPDATE  && resultCode==RESULT_OK) {
-            // Extract name value from result extras
-            String text = data.getExtras().getString("Text");
-        // items.set(position, text);
-        items.set(position, text);
-        //items.add(text);
-            lvItems.setAdapter(itemsAdapter);
-
-
-            itemsAdapter.notifyDataSetChanged();
-
-    }
-*/
 
         }
     }
 
 
-    }
+}
