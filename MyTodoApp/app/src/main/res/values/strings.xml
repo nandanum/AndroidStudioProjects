@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyTodoApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="button">btnSubmit</string>
+    <string name="submit_label">Submit</string>
+    <string name="add_item">Add a New Item</string>
+    <string name="btn_save">Update</string>
+    <string name="btnCancel">Cancel</string>
+
+
+
+</resources>

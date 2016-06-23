@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_23b07be9e22f7aad599b4727741a6a282cb84cc3\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_f4cfe5a11595e791a7845470ea23c4793c4e85b5\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_78e5d13a855e24e46f331fc74646a435d73b61fd\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_749b6f704358268b4eaf537b21ce3082cfe806de\classes.dex" />
+    </item>
+    <item
+        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\commons-io\commons-io\2.4\commons-io-2.4.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_b2955a73e8fdec69863902c786dced8321b28c5c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.1.0_58e910ced2fb9eb1bc0f61856d633d0a431e8279\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_e2fcc03e180ef8e481796f9527035061457c3731\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.1.0_8ee0e96dde964c6504667ebe87ca469b02aea12a\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_c07fda39953ab9c1289e1b877e029f1beb6df0fc\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="49810bafe567c2d1884d96de11295bfd088fcce3">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_8013753cf5b7526623e086cd792d623dd535289f\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_bdbf51667d5d6a3cf509c116e6a6c70be0f1dbd8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_3041bdf41814e6af89885f86ac1b6f78cde96f4b\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e1b5764095feb19589de26bd59a1a424f270134a">
+        <dex dex="C:\Users\mnandanuri\AndroidStudioProjects\MyTodoApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_c21a3d8d5e6b9e528bb67982502ae0829172154f\classes.dex" />
+    </item>
+
+</items>
