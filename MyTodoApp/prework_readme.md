@@ -23,13 +23,25 @@ The following **additional** features are implemented:
 
 * [ 3] Added functionality to not insert  or update any duplicate items in the todo app.
 
+* [ 4] Implemented Alert Dialog Box in Edit App while Cancel Item is clicked to notify user that Item will not be inserted.
+
+* [ 5] Implemented popup Menu When Add New Item is Clicked to notify user that duplicate records cannot be inserted.
+
+* [ 6] Added background color to the app , All Buttons in TodoList,Edit applications to display it in Blue ,text bold,text color white.
+
+* [ 7] Added Alert Dialog Box,Update Failed  in Edit App when trying to update the Item which is already present.
+
 
 
 
 ## Video Walkthrough 
 Here's a walkthrough of implemented user stories:
-
+Initial Video.
 https://s32.postimg.org/qr0nch42t/Android_Todo_App2.gif
+
+Added additional features 3,4,5,6,7 point in below video
+https://s32.postimg.org/sldh6sk5h/Todo_List.gif
+
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).

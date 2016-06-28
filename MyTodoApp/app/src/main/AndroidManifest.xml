@@ -8,7 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan">
+        android:windowSoftInputMode="adjustPan"
+        android:name="com.activeandroid.app.Application">
+    <meta-data android:name="ITEMSLIST_NAME" android:value="ListItems.db" />
+    <meta-data android:name="ITEMSLIST_VERSION" android:value="1"/>
+   <meta-data
+        android:name="ITEMSLIST_MODELS"
+        android:value="com.mnandanuri.mytodoapp.model.ItemsList" />
+
+
         <activity
             android:name=".TodoActivity"
             android:label="@string/app_name"
@@ -26,6 +34,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+
 
         <activity android:name=".EditItemActivity" />
     </application>

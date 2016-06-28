@@ -1,7 +1,9 @@
 package com.mnandanuri.mytodoapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
@@ -52,23 +54,51 @@ public class EditItemActivity extends AppCompatActivity {
         data.putExtra("Text", etName.getText().toString());
 
         data.putExtra("REQUEST_CODE", 20);
+        data.putExtra("CommandName", "Update");
         setResult(RESULT_OK, data);// set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
 
     }
 
-    //If item to be cancel do nothing.
+    //If item to be cancelled ,Notify user ,pass intent data with cmd set to Cancel to identify the call on the receiving end.
     public void onCancel(View view) {
         //  EditText etName = (EditText) findViewById(R.id.etMultiLineText);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Cancel Item");
+        builder.setMessage("Item will not be updated in the list");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+
+                dialog.dismiss();
+                Intent data = new Intent();
+                // Pass relevant data back as a result
+                data.putExtra("Text", item);
+
+                data.putExtra("REQUEST_CODE", 50);
+                data.putExtra("CommandName", "Cancel");
+                setResult(RESULT_OK, data);// set result code and bundle data for response
+                finish(); // closes the activity, pass data to parent
+            }
+        });
+
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
         // Prepare data intent
-        Intent data = new Intent();
+/*        Intent data = new Intent();
         // Pass relevant data back as a result
         data.putExtra("Text", item);
 
-        data.putExtra("REQUEST_CODE", 20);
+        data.putExtra("REQUEST_CODE", 50);
         setResult(RESULT_OK, data);// set result code and bundle data for response
         finish(); // closes the activity, pass data to parent
-
+*/
     }
 
 

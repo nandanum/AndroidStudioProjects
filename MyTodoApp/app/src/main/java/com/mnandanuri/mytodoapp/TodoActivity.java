@@ -1,11 +1,15 @@
 package com.mnandanuri.mytodoapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,11 +20,13 @@ import android.widget.ListView;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.mnandanuri.mytodoapp.model.ItemsList;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +39,7 @@ public class TodoActivity extends AppCompatActivity {
     private List<Button> buttons;
     private LayoutInflater mInflater;
     Set<String> hs = new HashSet<>();
+    Button btnSubmit;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -41,9 +48,14 @@ public class TodoActivity extends AppCompatActivity {
     private final int REQUEST_CODE_UPDATE = 20;
 
     private int position;
+    PopupMenu popup;
+    SimpleDateFormat sdf;
+    String currentDateandTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_todo);
         readItems();
@@ -64,11 +76,21 @@ public class TodoActivity extends AppCompatActivity {
         setUpListViewClickListener();
 
 
+        //  Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("ItemsList.db").create();
+        // ActiveAndroid.initialize(dbConfiguration);
+        //  ActiveAndroid.initialize(this);
+
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    private List<ItemsList> getAll() {
+        ItemsList item = new ItemsList();
+
+        return item.getAll();
+    }
 
     private void setUpListViewListener() {
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -76,7 +98,9 @@ public class TodoActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 items.remove(position);
                 itemsAdapter.notifyDataSetChanged();
-                writeItems();
+
+
+                //---- writeItems();
                 return true;
             }
 
@@ -101,7 +125,7 @@ public class TodoActivity extends AppCompatActivity {
 
                 i.putExtra("Text", text);
                 i.putExtra("ID", pos);
-
+                i.putExtra("CommandName", "ok");
 
                 i.setType("text/plain");
 
@@ -156,19 +180,41 @@ public class TodoActivity extends AppCompatActivity {
                 break;
             }
         }
-        if (!isItemPresent) {   //if not already exists
+        if (!isItemPresent) {   //if Item in the list not already exists
 
             itemsAdapter.add(itemText);
             etNewItem.setText("");
 
             lvItems.setAdapter(itemsAdapter);
+            ///Inserting Listview item into DB--ItemName,timestamp of the Item added..
+            ItemsList item = new ItemsList();
+            item.itemName = itemText;
 
-        } else {
-            etNewItem.setText("");
+
         }
+        //Popup is used to notify user that the Duplicate Items cannot be inserted.
+        else {
+            popup = new PopupMenu(TodoActivity.this, view);
+            //  popup.setOnMenuItemClickListener(TodoActivity.this.);
 
+            //Inflating the Popup using xml file
+            popup.getMenuInflater().inflate(R.menu.popup_todo, popup.getMenu());
+            //  popup.inflate(R.menu.popup_todo);
+            //registering popup with OnMenuItemClickListener
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+
+
+                    return true;
+                }
+                //popup.show();
+
+            });
+            popup.show();//showing popup menu
+            etNewItem.setText("");
+
+        }
     }
-
 
     @Override
     public void onStart() {
@@ -213,12 +259,14 @@ public class TodoActivity extends AppCompatActivity {
     }
 
     @Override
+    //Triggered when we receive data from the other application
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         //Update Item
         Boolean isPresent = false;
         if (requestCode == REQUEST_CODE_UPDATE && resultCode == RESULT_OK) {
             String text = data.getExtras().getString("Text");
+            String cmd = data.getExtras().getString("CommandName");
             for (int i = 0; i < itemsAdapter.getCount(); i++) {
 
                 if (text.equalsIgnoreCase(itemsAdapter.getItem(i))) {
@@ -233,9 +281,34 @@ public class TodoActivity extends AppCompatActivity {
                 lvItems.setAdapter(itemsAdapter);
                 itemsAdapter.notifyDataSetChanged();
             }
+            //Alert Box --This will be invoked only Item to be Updated is called.
 
+            else if (cmd.equalsIgnoreCase("Update") && isPresent == true) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle("Update Failed");
+                builder.setMessage("Item Already Exist in the list cannot Insert");
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing but close the dialog
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+            }
         }
     }
-
-
 }
+
+
+
