@@ -4,7 +4,7 @@ MyTodoApp is an android app that allows building a todo list and basic todo item
 
 Submitted by: *mnandanuri*
 
-Time spent: 8 hours spent in total
+Time spent: 6 hours spent in total
 
 ## User Stories
 
