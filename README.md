@@ -30,6 +30,10 @@ The following **additional** features are implemented:
 * [ 6] Added background color to the app , All Buttons in TodoList,Edit applications to display it in Blue ,text bold,text color white.
 
 * [ 7] Added Alert Dialog Box,Update Failed  in Edit App when trying to update the Item which is already present.
+* [8] Custom Adapter is added 
+* [9] DB Insertion,deletion,Updated.
+* [10] Calender view added for Date Field.
+
 
 
 
@@ -42,6 +46,8 @@ https://s32.postimg.org/qr0nch42t/Android_Todo_App2.gif
 Added additional features 3,4,5,6,7 point in below video
 https://s32.postimg.org/sldh6sk5h/Todo_List.gif
 
+Adding Next revision with Update,deletes,Retrieve,Insert from DB,Calender View Added
+https://s31.postimg.org/o4ky9fwbv/Android_Todo_App_DB.gif
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
