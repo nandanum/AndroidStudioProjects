@@ -1,40 +1,39 @@
 package com.mnandanuri.mytodoapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mnandanuri.mytodoapp.model.ItemsList;
 
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//import com.activeandroid.configur;
+
 public class TodoActivity extends AppCompatActivity {
-    ArrayList<String> items;
-    ArrayAdapter<String> itemsAdapter;
+    ArrayList<ToDoDetails> items;
+    //ArrayAdapter<ToDoAppAdater> itemsAdapter;
+
     ListView lvItems;
     private List<Button> buttons;
     private LayoutInflater mInflater;
@@ -45,12 +44,16 @@ public class TodoActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private final int REQUEST_CODE_ADD = 10;
     private final int REQUEST_CODE_UPDATE = 20;
 
     private int position;
     PopupMenu popup;
     SimpleDateFormat sdf;
     String currentDateandTime;
+    ToDoAppAdater adapter;
+    ToDoDetails tasks;
+    com.activeandroid.Configuration dbConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,28 +61,45 @@ public class TodoActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_todo);
-        readItems();
+
 
         lvItems = (ListView) findViewById(R.id.lvItems);
-        items = new ArrayList<>();
-        items.add("First Item");
-        items.add("Second Item");
+
+        items = new ArrayList<ToDoDetails>();
+
         String listString = items.toString();
         listString = listString.substring(1, listString.length() - 1);
         String newList[] = listString.split(",");
-        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        Resources res = getResources();
 
-        lvItems.setAdapter(itemsAdapter);
+        //itemsAdapter = new ToDoAppAdater(this, items);
+        dbConfiguration = new Configuration.Builder(this).setDatabaseName("DBListItems.db").create();
+        ActiveAndroid.initialize(dbConfiguration);
+        adapter = new ToDoAppAdater(this, items);
+        //       adapter.clear();
+
+        // lvItems.setAdapter(itemsAdapter);
+        List<ItemsList> dbListItems = getAll();
+        for (ItemsList dbItem : dbListItems) {
+
+            tasks = new ToDoDetails(dbItem.taskName);
+
+            adapter.add(tasks);
+
+
+        }
+
+        lvItems.setAdapter(adapter);
 
         setUpListViewListener();
 
         setUpListViewClickListener();
 
 
-        //  Configuration dbConfiguration = new Configuration.Builder(this).setDatabaseName("ItemsList.db").create();
-        // ActiveAndroid.initialize(dbConfiguration);
-        //  ActiveAndroid.initialize(this);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -95,12 +115,50 @@ public class TodoActivity extends AppCompatActivity {
     private void setUpListViewListener() {
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                items.remove(position);
-                itemsAdapter.notifyDataSetChanged();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
 
+               /* List<ItemsList> deleteItem = ItemsList.removeItem(pos);
+                for (ItemsList delItem : deleteItem) {
+                    System.out.println(delItem.taskName
+                    tasks=new ToDoDetails(delItem.taskName);
 
+                    adapter.remove(tasks);
+                }
                 //---- writeItems();
+                lvItems.setAdapter(adapter);
+                adapter.notifyDataSetChanged();*/
+
+                position = lvItems.getPositionForView(view);
+                view.setSelected(true);
+                //dbConfiguration = new Configuration.Builder(this).setDatabaseName("DBListItems.db").create();
+                //ActiveAndroid.initialize(dbConfiguration);
+
+                //Delete Item based on the ID Selected
+
+                List<ItemsList> dbId = ItemsList.getItemIdByTaskName(items.get(pos).toString());
+                for (ItemsList db : dbId) {
+                    ItemsList.removeItem(db.getId());
+                    items.remove(position);
+                    adapter.notifyDataSetChanged();
+
+                }
+/*                for (ItemsList dbItem : dbId) {
+                  int dbitemId= dbItem.getId();
+                }
+*/
+                //              List<ItemsList> delitem=ItemsList.removeItem(dbId.getId());
+
+
+
+         /*       List<ItemsList> dbListItems = getAll();
+                for (ItemsList dbItem : dbListItems) {
+                    System.out.println(dbItem.taskName);
+                    tasks=new ToDoDetails(dbItem.taskName);
+                    adapter.add(tasks);
+                }
+
+                lvItems.setAdapter(adapter);
+                adapter.notifyDataSetChanged();*/
                 return true;
             }
 
@@ -120,45 +178,35 @@ public class TodoActivity extends AppCompatActivity {
                 Intent i = new Intent(TodoActivity.this, EditItemActivity.class);
 
                 String text = lvItems.getItemAtPosition(pos).toString();
+
                 position = lvItems.getPositionForView(view);
                 view.setSelected(true);
+                List<ItemsList> dbId = ItemsList.getItemIdByTaskName(items.get(pos).toString());
+                List<ItemsList> dbListItem = null;
+                for (ItemsList db : dbId) {
+                    dbListItem = ItemsList.getItemById(db.getId());
+                }
 
-                i.putExtra("Text", text);
-                i.putExtra("ID", pos);
-                i.putExtra("CommandName", "ok");
+                for (ItemsList dbItem : dbListItem) {
 
-                i.setType("text/plain");
+                    System.out.println(dbItem.taskName);
 
+                    i.putExtra("TaskName", dbItem.taskName);
+                    i.putExtra("TaskDate", dbItem.dateCreated);
+                    i.putExtra("TaskNotes", dbItem.taskNotes);
+                    i.putExtra("TaskStatus", dbItem.status);
+                    i.putExtra("Id", dbItem.getId());
+                }
 
-                startActivityForResult(i, 20);
+                i.putExtra("CommandName", "Update");
+
+                startActivityForResult(i, REQUEST_CODE_UPDATE);
 
 
             }
         });
     }
 
-    private void readItems() {
-        File fileDir = getFilesDir();
-        File todoFile = new File(fileDir, "todo.txt");
-        try {
-            items = new ArrayList<>(FileUtils.readLines(todoFile));
-
-
-        } catch (IOException ex) {
-            items = new ArrayList<>();
-        }
-    }
-
-    private void writeItems() {
-        File fileDir = getFilesDir();
-        File todoFile = new File(fileDir, "todo.txt");
-
-        try {
-            FileUtils.writeLines(fileDir, items);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -167,54 +215,6 @@ public class TodoActivity extends AppCompatActivity {
         return true;
     }
 
-
-    public void onSubmit(View view) {
-        EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
-        Boolean isItemPresent = false;
-        String itemText = etNewItem.getText().toString();
-
-        for (int i = 0; i < itemsAdapter.getCount(); i++) {
-
-            if (itemText.equalsIgnoreCase(itemsAdapter.getItem(i))) {
-                isItemPresent = true;
-                break;
-            }
-        }
-        if (!isItemPresent) {   //if Item in the list not already exists
-
-            itemsAdapter.add(itemText);
-            etNewItem.setText("");
-
-            lvItems.setAdapter(itemsAdapter);
-            ///Inserting Listview item into DB--ItemName,timestamp of the Item added..
-            ItemsList item = new ItemsList();
-            item.itemName = itemText;
-
-
-        }
-        //Popup is used to notify user that the Duplicate Items cannot be inserted.
-        else {
-            popup = new PopupMenu(TodoActivity.this, view);
-            //  popup.setOnMenuItemClickListener(TodoActivity.this.);
-
-            //Inflating the Popup using xml file
-            popup.getMenuInflater().inflate(R.menu.popup_todo, popup.getMenu());
-            //  popup.inflate(R.menu.popup_todo);
-            //registering popup with OnMenuItemClickListener
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                public boolean onMenuItemClick(MenuItem item) {
-
-
-                    return true;
-                }
-                //popup.show();
-
-            });
-            popup.show();//showing popup menu
-            etNewItem.setText("");
-
-        }
-    }
 
     @Override
     public void onStart() {
@@ -236,6 +236,21 @@ public class TodoActivity extends AppCompatActivity {
                 Uri.parse("android-app://com.mnandanuri.mytodoapp/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.add:
+                Intent addIntent = new Intent(TodoActivity.this, AddItemActivity.class);
+                startActivityForResult(addIntent, REQUEST_CODE_ADD);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -261,54 +276,44 @@ public class TodoActivity extends AppCompatActivity {
     @Override
     //Triggered when we receive data from the other application
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE is defined above
-        //Update Item
-        Boolean isPresent = false;
-        if (requestCode == REQUEST_CODE_UPDATE && resultCode == RESULT_OK) {
-            String text = data.getExtras().getString("Text");
-            String cmd = data.getExtras().getString("CommandName");
-            for (int i = 0; i < itemsAdapter.getCount(); i++) {
 
-                if (text.equalsIgnoreCase(itemsAdapter.getItem(i))) {
+        Boolean isPresent = false;
+        String taskName = data.getExtras().getString("TaskName");
+        String cmd = data.getExtras().getString("CommandName");
+        if (requestCode == REQUEST_CODE_UPDATE && resultCode == RESULT_OK) {
+            for (int i = 0; i < adapter.getCount(); i++) {
+
+                if (taskName.equalsIgnoreCase(adapter.getItem(i).toString())) {
                     isPresent = true;
                     break;
                 }
             }
             if (!isPresent) {   //if not already exists
+                tasks = new ToDoDetails(taskName);
+                items.set(position, tasks);
 
-                items.set(position, text);
 
-                lvItems.setAdapter(itemsAdapter);
-                itemsAdapter.notifyDataSetChanged();
+                lvItems.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
-            //Alert Box --This will be invoked only Item to be Updated is called.
+        } else if (requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
 
-            else if (cmd.equalsIgnoreCase("Update") && isPresent == true) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle("Update Failed");
-                builder.setMessage("Item Already Exist in the list cannot Insert");
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing but close the dialog
-
-                        dialog.dismiss();
-
-                    }
-                });
-
-
-                AlertDialog alert = builder.create();
-                alert.show();
-
-
+            adapter.clear();
+            Boolean isItemPresent = false;
+            List<ItemsList> dbListItems = getAll();
+            for (ItemsList dbItem : dbListItems) {
+                System.out.println(dbItem.taskName);
+                tasks = new ToDoDetails(dbItem.taskName);
+                adapter.add(tasks);
             }
+
+            lvItems.setAdapter(adapter);
+
+
         }
     }
 }
+
 
 
 

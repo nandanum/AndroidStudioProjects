@@ -12,41 +12,29 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".TodoActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary"
+
+        >
+    </android.support.v7.widget.Toolbar>
 
 <ListView
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:id="@+id/lvItems"
     android:descendantFocusability="beforeDescendants"
-android:layout_alignParentTop="true"
-android:layout_alignParentStart="true"
-android:layout_above="@+id/btnSubmit" />
-
-<EditText
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:id="@+id/etNewItem"
-    android:hint="@string/add_item"
-
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true" />
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/toolbar" />
 
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
 
-        android:text="Add Item"
-        android:id="@+id/btnSubmit"
-        android:onClick="onSubmit"
-        android:background="#176CEC"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:layout_alignBottom="@+id/etNewItem"
-        android:layout_alignEnd="@+id/lvItems"
-        android:layout_marginEnd="47dp" />
 
 
 </RelativeLayout>

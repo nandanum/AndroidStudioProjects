@@ -1,35 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:background="#fcfcfc"
-    tools:context="com.mnandanuri.mytodoapp.EditItemActivity">
-
-    <!--  android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:focusableInTouchMode="true"
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary"
-
-        >
-    </android.support.v7.widget.Toolbar>
-    -->
-
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,10 +14,9 @@
         android:textSize="20dp"
         android:layout_weight="0.24"
         android:textAlignment="center"
-
-        android:layout_marginTop="29dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,9 +27,9 @@
         android:textSize="20dp"
         android:layout_weight="0.24"
         android:textAlignment="center"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/etTaskName"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_marginTop="101dp"
+        android:layout_below="@+id/tvTaskName"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,17 +40,17 @@
         android:textSize="20dp"
         android:layout_weight="0.24"
         android:textAlignment="center"
-        android:layout_above="@+id/etTaskStatus"
+        android:layout_below="@+id/etTaskDate"
         android:layout_alignEnd="@+id/textView2"
-        android:layout_marginBottom="41dp" />
+        android:layout_marginTop="42dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etTaskNotes"
         android:hint="@string/add_item3"
-        android:layout_alignTop="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignStart="@+id/etTaskName" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,19 +76,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etTaskName"
-        android:hint="Add Task Name"
-        android:nextFocusForward="@+id/etTaskName"
-        android:windowSoftInputMode="adjustResize"
-        android:layout_alignBottom="@+id/tvTaskName"
-        android:layout_alignStart="@+id/etTaskNotes" />
-
+        android:hint="@string/add_item1"
+        android:layout_above="@+id/tvTaskDate"
+        android:layout_centerHorizontal="true" />
 
     <CalendarView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etTaskDate"
-        android:layout_toEndOf="@+id/tvTaskName"
-        android:layout_below="@+id/etTaskName"
-        android:layout_above="@+id/etTaskNotes" />
+        android:layout_below="@+id/tvTaskName"
+        android:layout_toEndOf="@+id/tvTaskName" />
+
 
 </RelativeLayout>
