@@ -3,119 +3,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusableInTouchMode="true"
     android:background="#fcfcfc"
     tools:context="com.mnandanuri.mytodoapp.EditItemActivity">
 
-    <!--  android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:focusableInTouchMode="true"
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary"
-
-        >
-    </android.support.v7.widget.Toolbar>
-    -->
-
-
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="TaskName"
-        android:textStyle="bold"
-        android:id="@+id/tvTaskName"
-        android:textSize="20dp"
-        android:layout_weight="0.24"
-        android:textAlignment="center"
-
-        android:layout_marginTop="29dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:selectAllOnFocus="true"
+        android:id="@+id/etMultiLineText"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/btnCancel" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_save"
+        android:background="#176CEC"
+        android:textColor="#fff"
         android:textStyle="bold"
-        android:id="@+id/tvTaskDate"
-        android:text="DueDate"
-        android:textSize="20dp"
-        android:layout_weight="0.24"
-        android:textAlignment="center"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/etTaskName"
-        android:layout_alignStart="@+id/textView" />
 
-    <TextView
+        android:id="@+id/btnSaveNewText"
+        android:onClick="onSave"
+        android:hint="Save"
+        android:layout_alignTop="@+id/btnCancel"
+        android:layout_alignStart="@+id/etMultiLineText" />
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btnCancel"
+        android:background="#176CEC"
+        android:textColor="#fff"
         android:textStyle="bold"
-        android:id="@+id/textView"
-        android:text="Notes"
-        android:textSize="20dp"
-        android:layout_weight="0.24"
-        android:textAlignment="center"
-        android:layout_above="@+id/etTaskStatus"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_marginBottom="41dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etTaskNotes"
-        android:hint="@string/add_item3"
-        android:layout_alignTop="@+id/textView"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:textStyle="bold"
-        android:id="@+id/textView2"
-        android:text="Status"
-        android:textSize="20dp"
-        android:layout_weight="0.24"
-        android:textAlignment="center"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etTaskStatus"
-        android:hint="@string/add_item4"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignStart="@+id/etTaskNotes" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etTaskName"
-        android:hint="Add Task Name"
-        android:nextFocusForward="@+id/etTaskName"
-        android:windowSoftInputMode="adjustResize"
-        android:layout_alignBottom="@+id/tvTaskName"
-        android:layout_alignStart="@+id/etTaskNotes" />
-
-
-    <CalendarView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etTaskDate"
-        android:layout_toEndOf="@+id/tvTaskName"
-        android:layout_below="@+id/etTaskName"
-        android:layout_above="@+id/etTaskNotes" />
+        android:id="@+id/btnCancel"
+        android:onClick="onCancel"
+        android:layout_below="@+id/etMultiLineText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="85dp" />
 
 </RelativeLayout>

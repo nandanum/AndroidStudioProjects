@@ -10,10 +10,10 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan"
         android:name="com.activeandroid.app.Application">
-    <meta-data android:name="AA_DB_NAME" android:value="TodoApp.db" />
-    <meta-data android:name="AA_DB_VERSION" android:value="1"/>
+    <meta-data android:name="ITEMSLIST_NAME" android:value="ListItems.db" />
+    <meta-data android:name="ITEMSLIST_VERSION" android:value="1"/>
    <meta-data
-        android:name="AA_MODELS"
+        android:name="ITEMSLIST_MODELS"
         android:value="com.mnandanuri.mytodoapp.model.ItemsList" />
 
 
@@ -37,11 +37,7 @@
 
 
 
-        <activity android:name=".EditItemActivity"
-        android:screenOrientation="portrait"
-            />
-        <activity android:name=".AddItemActivity"
-            android:screenOrientation="portrait"    />
+        <activity android:name=".EditItemActivity" />
     </application>
 
 </manifest>

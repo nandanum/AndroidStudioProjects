@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">MyTodoApp</string>
     <string name="action_settings">Settings</string>
-    <string name="add_item1">Add TaskName</string>
     <string name="button">btnSubmit</string>
-    <string name="add_item2">Add Due Date</string>
     <string name="submit_label">Submit</string>
-    <string name="add_item3">Add Notes</string>
-    <string name="add_item4">Add Status</string>
+    <string name="add_item">Add a New Item</string>
     <string name="btn_save">Update</string>
     <string name="btnCancel">Cancel</string>
-    <string name="exitOption">Exit</string>
-    <string name="aboutOption">About</string>
+
 
 
 </resources>
